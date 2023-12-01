@@ -1,0 +1,17 @@
+<h4>Enregistrement utilisateur</h4>
+<form [formGroup]="myFormGroup" (ngSubmit)="onSubmit()">
+  <p>
+    Nickname : <input type="text" formControlName="nickname" />
+  </p>
+  <p>
+    Email : <input type="email" formControlName="email" />
+  </p>
+  <p>
+    Mot de passe : <input type="password" formControlName="password" />
+  </p>
+  <p>
+    Confirmation : <input type="password" formControlName="confirmPassword" />
+  </p>
+  <button type="submit" [disabled]="myFormGroup.invalid">Valider</button> &nbsp;
+  <button type="reset">Annuler</button>
+</form>
