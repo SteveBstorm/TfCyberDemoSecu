@@ -13,11 +13,20 @@ import { Subject } from 'rxjs';
 export class AuthService {
   private url : string = environment.apiurl
 
-  get isConnected() : boolean {
-    return localStorage.getItem("token") != undefined
+  // get isConnected() : boolean {
+  //   return localStorage.getItem("token") != undefined
+  // }
+
+  get connectedUser() : ConnectedUser | undefined {
+    let user = localStorage.getItem("userInfo")
+    if(user != undefined)
+      return JSON.parse(user)
+    return undefined
   }
 
-  isConnectedSubject : Subject<boolean> = new Subject<boolean>()
+  connectedUserSubject : Subject<ConnectedUser | undefined> = new Subject<ConnectedUser | undefined>()
+
+  //isConnectedSubject : Subject<boolean> = new Subject<boolean>()
 
   constructor(
     private _client : HttpClient,
@@ -43,7 +52,8 @@ export class AuthService {
             }
 
             localStorage.setItem("userInfo", JSON.stringify(cn))
-            this.isConnectedSubject.next(this.isConnected)
+            //this.isConnectedSubject.next(this.isConnected)
+            this.connectedUserSubject.next(this.connectedUser)
             this._router.navigate(["article/list"])
           }
         })
@@ -51,8 +61,9 @@ export class AuthService {
 
     logout(){
       localStorage.clear()
-      this.isConnectedSubject.next(this.isConnected)
-
+      //this.isConnectedSubject.next(this.isConnected)
+      this.connectedUserSubject.next(this.connectedUser)
+      this._router.navigate(["home"])
     }
 
 

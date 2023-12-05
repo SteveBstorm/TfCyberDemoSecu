@@ -1,1 +1,14 @@
-<p>userlist works!</p>
+<table>
+  <tr>
+    <th>Nickname</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let u of userList">
+    <td>{{u.nickname}}</td>
+    <td>{{u.email}}</td>
+    <td>{{u.isAdmin ? "admin" : "user"}}</td>
+    <td><button *ngIf="!u.isAdmin" (click)="setAdmin(u.id)">Donner droit admin</button></td>
+  </tr>
+</table>

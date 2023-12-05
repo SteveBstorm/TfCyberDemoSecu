@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
+import { ArticleService } from '../../../services/article.service';
 
 @Component({
   selector: 'app-create',
@@ -12,7 +13,8 @@ export class CreateComponent {
   myFormGroup! : FormGroup
 
   constructor(
-    private _formBuilder : FormBuilder
+    private _formBuilder : FormBuilder,
+    private _articleService : ArticleService
 
     ){}
 
@@ -27,6 +29,6 @@ export class CreateComponent {
 
   onSubmit() {
     console.log(this.myFormGroup.value);
-
+    this._articleService.create(this.myFormGroup.value)
   }
 }

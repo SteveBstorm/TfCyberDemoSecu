@@ -1,3 +1,7 @@
 <ul *ngFor="let a of articleList">
-  <li>{{a.nom}} <button (click)="delete(a.id)">Supprimer</button></li>
+  <li>{{a.nom}}
+    <button *ngIf="role=='Admin' " (click)="delete(a.id)">Supprimer</button>
+    <button *ngIf="role=='Admin' " (click)="update(a.id)">Mettre à jour</button>
+
+  </li>
 </ul>

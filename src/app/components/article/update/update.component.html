@@ -1,4 +1,4 @@
-<h4>Ajouter un article</h4>
+<div *ngIf="currentArticle">
 <form [formGroup]="myFormGroup" (ngSubmit)="onSubmit()">
   <p>
     Nom : <input type="text" formControlName="nom">
@@ -14,3 +14,4 @@
   </p>
   <button type="submit">Valider</button>
 </form>
+</div>

@@ -1,9 +1,11 @@
-<span *ngIf="!isConnected; else not">
-  <a routerLink="register">Créer un compte</a> |
-  <a routerLink="login">Connexion</a> |
+| <span *ngIf="!connectedUser; else not">
+  <a routerLink="register">Créer un compte |</a>
+  <a routerLink="login">Connexion |</a>
 </span>
 <ng-template #not>
   <a style="cursor: pointer;" (click)="logout()">Déconnexion</a>
+  |<p> <a routerLink="article/list">Liste des articles |</a> </p>
 </ng-template>
- | <a routerLink="article/list">Liste des articles</a>
 
+ <a routerLink="userlist" *ngIf="connectedUser?.role == 'Admin'">Liste des users</a> |
+<a routerLink="article/create" *ngIf="connectedUser?.role == 'Admin'">Ajouter un article</a>

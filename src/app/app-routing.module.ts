@@ -7,14 +7,19 @@ import { CreateComponent } from './components/article/create/create.component';
 import { UserlistComponent } from './components/user/userlist/userlist.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { authGuard } from './shared/guard/auth.guard';
+import { adminGuard } from './shared/guard/admin.guard';
+import { HomeComponent } from './components/home/home.component';
+import { UpdateComponent } from './components/article/update/update.component';
 
 const routes: Routes = [
-  {path : "", redirectTo : 'article/list', pathMatch : "full"},
+  {path : "", redirectTo : 'home', pathMatch : "full"},
+  {path : "home", component : HomeComponent},
   {path : 'register', canActivate : [authGuard], component : RegisterComponent},
   {path : 'login', canActivate : [authGuard], component : LoginComponent},
-  {path : 'userlist', component : UserlistComponent},
+  {path : 'userlist', canActivate : [adminGuard], component : UserlistComponent},
   {path : 'article/list', component : ListComponent},
-  {path : 'article/create', component : CreateComponent},
+  {path : 'article/create', canActivate : [adminGuard], component : CreateComponent},
+  {path : 'article/update/:id', canActivate : [adminGuard], component : UpdateComponent},
   {path : 'error', component : ErrorComponent},
   {path : '**', redirectTo : 'error'}
 ];

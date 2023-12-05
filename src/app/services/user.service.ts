@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environment';
 import { User } from '../shared/models/user.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,14 @@ export class UserService {
       }
 
     })
+  }
+
+  getAll() : Observable<User[]> {
+    //let myHeader : HttpHeaders = new HttpHeaders({"authorization" : "bearer "+ localStorage.getItem("token")})
+    return this._client.get<User[]>(this.url + "auth/allUsers")
+  }
+
+  setAdmin(id : number) : Observable<any> {
+    return this._client.patch<any>(this.url + "auth/setAdmin/"+id, null)
   }
 }
